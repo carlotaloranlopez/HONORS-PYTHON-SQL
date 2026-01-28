@@ -30,7 +30,7 @@ b0_100 = os.path.join(cd, "NO_FARMS/100M_BUFFERS/b0/b0.shp")  # Final output
 # --------------------------------------------------------------------------------------------
 for file in [b0_NF, b0_100]:
     # Delete existing outputs if they exist
-    delete_shapefile(f)
+    delete_shapefile(file)
 
     # Make b0 twice
     processing.run("native:fixgeometries", {

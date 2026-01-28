@@ -68,7 +68,7 @@ processing.run("native:joinattributesbylocation", {
     'INPUT': farm_src,
     'PREDICATE':[1,2,4],
     'JOIN': gleba_src,
-    'JOIN_FIELDS':['contract_recipient_id','year'],
+    'JOIN_FIELDS':['contract_r'],
     'METHOD':0,
     'DISCARD_NONMATCHING':False,
     'PREFIX':'',
