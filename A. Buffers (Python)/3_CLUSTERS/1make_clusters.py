@@ -1,5 +1,5 @@
 # --------------------------------------------------------------------------------------------
-# This script dissolves overlapping buffers at 250, 500, 1000, 2000m to make clusters.
+# This script dissolves overlapping buffers at 250, 500, 750, 1000m to make clusters.
 # --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
@@ -38,9 +38,9 @@ sources = [
         os.path.join(clusters_dir, "b1000_cluster/b1000_cluster_b0/b1000_cluster_b0.shp")
     ),
     (
-        os.path.join(buffers_dir, "b2000/b2000.shp"),
-        os.path.join(buffers_dir, "b2000/b2000_fixed.shp"),
-        os.path.join(clusters_dir, "b2000_cluster/b2000_cluster_b0/b2000_cluster_b0.shp")
+        os.path.join(buffers_dir, "b750/b750.shp"),
+        os.path.join(buffers_dir, "b750/b750_fixed.shp"),
+        os.path.join(clusters_dir, "b750_cluster/b750_cluster_b0/b750_cluster_b0.shp")
     )
 ]
 

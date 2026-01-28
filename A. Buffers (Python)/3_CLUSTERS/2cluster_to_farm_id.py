@@ -42,9 +42,9 @@ clusters = [
         os.path.join(out_dir, "cluster1000_to_farm_id.csv")
     ),
     (
-        os.path.join(clusters_dir, "b2000_cluster/b2000_cluster_b0/b2000_cluster_b0.shp"),
-        os.path.join(clusters_dir, "b2000_cluster/b2000_cluster_b0/b2000_cluster_b0_fixed.shp"),
-        os.path.join(out_dir, "cluster2000_to_farm_id.csv")
+        os.path.join(clusters_dir, "b750_cluster/b750_cluster_b0/b750_cluster_b0.shp"),
+        os.path.join(clusters_dir, "b750_cluster/b750_cluster_b0/b750_cluster_b0_fixed.shp"),
+        os.path.join(out_dir, "cluster750_to_farm_id.csv")
     )
 ]
 

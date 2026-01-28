@@ -1,7 +1,7 @@
 # --------------------------------------------------------------------------------------------
-# This file takes a cluster 2000 shapefile and creates buffers at multiples of 2000m from
+# This file takes a cluster 750 shapefile and creates buffers at multiples of 750m from
 # its border. These files are saved to each buffer sub-folder in foler with name 
-# b2000_cluster_b* inside CREDIT/GLEBAS/CLUSTERS/b2000_cluster.
+# b750_cluster_b* inside CREDIT/GLEBAS/CLUSTERS/b750_cluster.
 # --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
@@ -18,15 +18,16 @@ def delete_shapefile(path):
             os.remove(p)
 
 # Create variables to set working directory, buffer dictionary with buffer names and distance in decimal degrees, and universal input file
-cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b2000_cluster/"
+cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b750_cluster/"
 buffers = {
-    "2000": 0.018157,
-    "4000": 0.036314,
-    "6000": 0.054471,
-    "8000": 0.072628,
-    "10000": 0.090785
+    "750": 0.018157,
+    "1500": 0.036314,
+    "2250": 0.054471,
+    "3000": 0.072628,
+    "3750": 0.090785,
+    "4500": 0.090785
 }
-input_vector = f"{cd}b2000_cluster_b0/b2000_cluster_b0_fixed.shp"
+input_vector = f"{cd}b750_cluster_b0/b750_cluster_b0_fixed.shp"
 
 
 # --------------------------------------------------------------------------------------------
@@ -35,7 +36,7 @@ input_vector = f"{cd}b2000_cluster_b0/b2000_cluster_b0_fixed.shp"
 
 for b in buffers:
     # Define output file name and get distance from dictionary
-    output_vector = f"{cd}b2000_cluster_b{b}/b2000_cluster_b{b}.shp"
+    output_vector = f"{cd}b750_cluster_b{b}/b750_cluster_b{b}.shp"
     degrees = buffers[b]
     
     # Remove existing buffer file if it exists
