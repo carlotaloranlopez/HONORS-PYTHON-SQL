@@ -1,11 +1,11 @@
 # --------------------------------------------------------------------------------------------
 # This file removes overlap between outer and inner buffers to create disjoint rings for the
-# 500m cluster:
-#   b500_ring  = b500  - b0
-#   b1000_ring  = b1000  - b500
+# 2000m cluster:
+#   b2000_ring  = b2000  - b0
+#   b4000_ring  = b4000  - 2000
 #   ...
-# Files are saved as b500_cluster_b*_ring to each buffer sub-folder with name b500_cluster_b*, 
-# inside CREDIT/GLEBAS/CLUSTERS/500, in the clean data folder.
+# Files are saved as b2000_cluster_b*_ring to each buffer sub-folder with name b2000_cluster_b*, 
+# inside CREDIT/GLEBAS/CLUSTERS/b2000_cluster, in the clean data folder.
 # --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
@@ -23,18 +23,13 @@ def delete_shapefile(path):
             os.remove(p)
 
 # Path and buffer pair definition
-cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b500_cluster/"
+cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b2000_cluster/"
 buffer_pairs = [
-    ("b0", "b500"),
-    ("b500", "b1000"),
-    ("b1000", "b1500"),
-    ("b1500", "b2000"),
-    ("b2000", "b2500"),
-    ("b2500", "b3000"),
-    ("b3000", "b3500"),
-    ("b3500", "b4000"),
-    ("b4000", "b4500"),
-    ("b4500", "b5000")
+    ("b0", "b2000"),
+    ("b2000", "b4000"),
+    ("b4000", "b6000"),
+    ("b6000", "b8000"),
+    ("b8000", "b10000")
 ]
 
 
@@ -43,13 +38,13 @@ buffer_pairs = [
 # --------------------------------------------------------------------------------------------
 for inner, outer in buffer_pairs:
 
-    inner_path = f"{cd}b500_cluster_{inner}/b500_cluster_{inner}.shp"
-    outer_path = f"{cd}b500_cluster_{outer}/b500_cluster_{outer}.shp"
+    inner_path = f"{cd}b2000_cluster_{inner}/b2000_cluster_{inner}.shp"
+    outer_path = f"{cd}b2000_cluster_{outer}/b2000_cluster_{outer}.shp"
 
-    inner_fixed = f"{cd}b500_cluster_{inner}/b500_cluster_{inner}_fixed.shp"
-    outer_fixed = f"{cd}b500_cluster_{outer}/b500_cluster_{outer}_fixed.shp"
+    inner_fixed = f"{cd}b2000_cluster_{inner}/b2000_cluster_{inner}_fixed.shp"
+    outer_fixed = f"{cd}b2000_cluster_{outer}/b2000_cluster_{outer}_fixed.shp"
 
-    ring_path = f"{cd}b500_cluster_{outer}/b500_cluster_{outer}_ring.shp"
+    ring_path = f"{cd}b2000_cluster_{outer}/b2000_cluster_{outer}_ring.shp"
 
     # Clean old files
     for f in [inner_fixed, outer_fixed, ring_path]:
