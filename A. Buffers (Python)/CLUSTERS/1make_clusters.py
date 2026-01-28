@@ -20,10 +20,10 @@ def delete_shapefile(path):
 cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/FARMS/NF_BUFFERS/"
 source250= os.path.join(cd, "b250/b250.shp")
 source250_f= os.path.join(cd, "b250/b250_fixed.shp")
-source500= os.path.join(cd, "b500/b500.shp")
-source500_f= os.path.join(cd, "b500/b500_fixed.shp")
-source1000= os.path.join(cd, "b1000/b1000.shp")
-source1000_f= os.path.join(cd, "b1000/b1000_fixed.shp")
+source500= os.path.join(cd, "b500_1/b500_1.shp")
+source500_f= os.path.join(cd, "b500_1/b500_1_fixed.shp")
+source1000= os.path.join(cd, "b1000_1/b1000_1.shp")
+source1000_f= os.path.join(cd, "b1000_1/b1000_1_fixed.shp")
 source2000= os.path.join(cd, "b2000/b2000.shp")
 source2000_f= os.path.join(cd, "b2000/b2000_fixed.shp")
 cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/"
