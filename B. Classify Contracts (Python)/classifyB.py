@@ -2,7 +2,7 @@
 # This script defines a function to re-classify credit contracts into cost and investment
 # categories (see Theoretical Framework). It inputs the contract file
 # 'operacao_gleba_master', cleaned in STATA, and outputs a reduced re-classified file
-# mapping contract_recipient_id to the corrected classification, 'operacao_gleba_master_ic'.
+# mapping contract_recipient_id to the corrected classification type B, 'classifyB.csv'.
 # --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ import unicodedata
 
 # Path definitions
 CSV_PATH = "/Users/carlotaloranlopez/Desktop/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/CONTRACT/operacao_gleba_master.csv"
-OUTPUT_PATH = "/Users/carlotaloranlopez/Desktop/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/CONTRACT/classify.csv"
+OUTPUT_PATH = "/Users/carlotaloranlopez/Desktop/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/CONTRACT/classifyB.csv"
 
 # Columns used for purpose / rules
 CATEGORICAL_COLS = [
@@ -32,10 +32,14 @@ NUMERIC_COLS = [
     "vl_area_informada"
 ]
 
-# Thresholds for numeric indicators of investment (by ChatGPT)
-LOAN_SIZE_THRESHOLD = 50000
-PRED_PROD_THRESHOLD = 100000
-FARM_AREA_THRESHOLD = 50
+# --------------------------------------------------------------------------------------------
+# Stricter numeric thresholds
+# --------------------------------------------------------------------------------------------
+
+# Define thresholds (by ChatGPT)
+LOAN_SIZE_THRESHOLD = 120000
+PRED_PROD_THRESHOLD = 250000
+FARM_AREA_THRESHOLD = 120
 
 # Program restrictions
 program_mapping = {
@@ -68,39 +72,62 @@ def normalize_text(s):
 
 def classify(row):
     """
-    Rules:
+    Rules (Type B very strict):
     - Default: custeio
     - Investimento if:
         - Program mapping enforces it, OR
-        - Keywords indicate capital investment, OR
-        - Numeric thresholds exceeded
+        - Durable capital keywords + at least one numeric signal, OR
+        - All three numeric investment thresholds are exceeded
     """
 
-    # Program-based rule
+    # Program-based rule (dominant)
     prog = str(row.get("cd_programa", "")).lower()
     mapped = program_mapping.get(prog, None)
     if mapped is not None:
         return mapped
 
-    # Text-based rule
+    # Text-based rule (by ChatGPT)
     parts = [str(row[col]) for col in CATEGORICAL_COLS if col in row]
     text = normalize_text(" ".join(parts))
 
-    investment_keywords = [ # by ChatGPT
-        "maquina", "trator", "implemento", "tecnologia",
-        "reforma", "infraestrutura", "melhoria", "equipamento",
-        "benfeitoria", "instalacao", "capital"
+    investment_keywords = [
+        "trator", "colheitadeira",
+        "equipamento pesado", "irrigacao",
+        "silo", "armazenagem",
+        "galpao", "infraestrutura",
+        "instalacao fixa",
+        "benfeitoria permanente",
+        "ampliacao", "modernizacao"
     ]
 
-    if any(kw in text for kw in investment_keywords):
+    exclusion_keywords = [
+        "insumo", "semente", "fertilizante",
+        "defensivo", "manutencao", "reparo",
+        "substituicao", "capital de giro",
+        "custeio", "safra", "ciclo",
+        "curto prazo", "operacional"
+    ]
+
+    # Meet numeric signals (by ChatGPT)
+    numeric_signals = 0
+
+    if row.get("vl_parc_credito", 0) >= LOAN_SIZE_THRESHOLD:
+        numeric_signals += 1
+    if row.get("vl_prev_prod", 0) >= PRED_PROD_THRESHOLD:
+        numeric_signals += 1
+    if row.get("vl_area_informada", 0) >= FARM_AREA_THRESHOLD:
+        numeric_signals += 1
+
+    # Keyword and numeric confirmation
+    if (
+        any(kw in text for kw in investment_keywords) and
+        not any(kw in text for kw in exclusion_keywords) and
+        numeric_signals >= 1
+    ):
         return "investimento"
 
-    # Numeric rules
-    if (
-        row.get("vl_parc_credito", 0) > LOAN_SIZE_THRESHOLD or
-        row.get("vl_prev_prod", 0) > PRED_PROD_THRESHOLD or
-        row.get("vl_area_informada", 0) > FARM_AREA_THRESHOLD
-    ):
+    # Numeric-only rule: require ALL signals
+    if numeric_signals == 3:
         return "investimento"
 
     return "custeio"
@@ -126,15 +153,16 @@ for col in NUMERIC_COLS:
 # Apply classification
 df["cd_finalidade_corrected"] = df.apply(classify, axis=1)
 
+
 # --------------------------------------------------------------------------------------------
 # Save reduced output (contract_recipient_id + corrected classification)
 # --------------------------------------------------------------------------------------------
 
+# Save csv
 output_df = df[["contract_recipient_id", "cd_finalidade_corrected"]].copy()
-
 output_df.to_csv(OUTPUT_PATH, index=False, encoding="utf-8")
 print(f"CSV saved to: {OUTPUT_PATH}")
 
-# Optional sanity check
+# Print output
 print("\n=== Corrected contract counts ===")
 print(output_df["cd_finalidade_corrected"].value_counts())
