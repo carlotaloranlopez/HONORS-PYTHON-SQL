@@ -29,7 +29,7 @@ buffers = {
     "1750": 0.0158874,
     "2000": 0.018157,
 }
-input_vector = f"{cd}b250_cluster_b0/b250_cluster_b0.shp"
+input_vector = f"{cd}b250_cluster_b0/b250_cluster_b0_fixed.shp"
 
 
 # --------------------------------------------------------------------------------------------
