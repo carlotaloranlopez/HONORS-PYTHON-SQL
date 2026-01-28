@@ -20,12 +20,12 @@ def delete_shapefile(path):
 # Create variables to set working directory, buffer dictionary with buffer names and distance in decimal degrees, and universal input file
 cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b750_cluster/"
 buffers = {
-    "750": 0.018157,
-    "1500": 0.036314,
-    "2250": 0.054471,
-    "3000": 0.072628,
-    "3750": 0.090785,
-    "4500": 0.090785
+    "750": 0.006809,
+    "1500": 0.013618,
+    "2250": 0.020427,
+    "3000": 0.027235,
+    "3750": 0.034044,
+    "4500": 0.040853
 }
 input_vector = f"{cd}b750_cluster_b0/b750_cluster_b0_fixed.shp"
 

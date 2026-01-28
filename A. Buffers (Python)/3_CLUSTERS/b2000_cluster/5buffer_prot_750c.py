@@ -1,6 +1,6 @@
 # --------------------------------------------------------------------------------------------
-# This script removes protected land from all buffers (including b0) in the 2000 cluster.
-# It outputs shapefiles b2000_cluster_b*_ring_prot, saved to each buffer folder.
+# This script removes protected land from all buffers (including b0) in the 750 cluster.
+# It outputs shapefiles b750_cluster_b*_ring_prot, saved to each buffer folder.
 # --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
@@ -18,15 +18,16 @@ def delete_shapefile(path):
             os.remove(p)
 
 # Path and buffer list definitions
-cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b2000_cluster/"
+cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b750_cluster/"
 protected = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/SHAPEFILES/Brazil_UCS/brazil_UCS_fixed.shp"
 buffers = [
     "b0",
-    "b2000",
-    "b4000",
-    "b6000",
-    "b8000",
-    "b10000"
+    "b750",
+    "b1500",
+    "b2250",
+    "b3000",
+    "b3750",
+    "b4500"
 ]
 
 
@@ -45,18 +46,18 @@ protected_src = QgsProcessingFeatureSourceDefinition(
 for b in buffers:
 
     input_vector = (
-        f"{cd}b2000_cluster_{b}/b2000_cluster_{b}.shp" if b == "b0"
-        else f"{cd}b2000_cluster_{b}/b2000_cluster_{b}_ring.shp"
+        f"{cd}b750_cluster_{b}/b750_cluster_{b}.shp" if b == "b0"
+        else f"{cd}b750_cluster_{b}/b750_cluster_{b}_ring.shp"
     )
 
     fixed_vector = (
-        f"{cd}b2000_cluster_{b}/b2000_cluster_{b}_fixed.shp" if b == "b0"
-        else f"{cd}b2000_cluster_{b}/b2000_cluster_{b}_fixed_ring.shp"
+        f"{cd}b750_cluster_{b}/b750_cluster_{b}_fixed.shp" if b == "b0"
+        else f"{cd}b750_cluster_{b}/b750_cluster_{b}_fixed_ring.shp"
     )
     
     output_vector = (
-        f"{cd}b2000_cluster_{b}/b2000_cluster_{b}_prot.shp" if b == "b0"
-        else f"{cd}b2000_cluster_{b}/b2000_cluster_{b}_ring_prot.shp"
+        f"{cd}b750_cluster_{b}/b750_cluster_{b}_prot.shp" if b == "b0"
+        else f"{cd}b750_cluster_{b}/b750_cluster_{b}_ring_prot.shp"
     )
 
     # Cleanup old outputs
