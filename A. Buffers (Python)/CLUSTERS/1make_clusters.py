@@ -27,10 +27,10 @@ source1000_f= os.path.join(cd, "b1000_1/b1000_1_fixed.shp")
 source2000= os.path.join(cd, "b2000/b2000.shp")
 source2000_f= os.path.join(cd, "b2000/b2000_fixed.shp")
 cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/"
-cluster250= os.path.join(cd, "b250_cluster/b250_cluster.shp")
-cluster500= os.path.join(cd, "b500_cluster/b500_cluster.shp")
-cluster1000= os.path.join(cd, "b1000_cluster/b1000_cluster.shp")
-cluster2000= os.path.join(cd, "b2000_cluster/b2000_cluster.shp")
+cluster250= os.path.join(cd, "b250_cluster/b250_cluster_b0/b250_cluster_b0.shp")
+cluster500= os.path.join(cd, "b500_cluster/b500_cluster_b0/b500_cluster_b0.shp")
+cluster1000= os.path.join(cd, "b1000_cluster/b1000_cluster_b0/b1000_cluster_b0.shp")
+cluster2000= os.path.join(cd, "b2000_cluster/b2000_cluster_b0/b2000_cluster_b0.shp")
 
 # Delete existing outputs if they exist
 for f in [source250_f, source500_f, source1000_f, source2000_f, cluster250, cluster500, cluster1000, cluster2000]:
