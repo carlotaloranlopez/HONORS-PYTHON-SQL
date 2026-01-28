@@ -26,25 +26,14 @@ source1000= os.path.join(cd, "b1000/b1000.shp")
 source1000_f= os.path.join(cd, "b1000/b1000_fixed.shp")
 source2000= os.path.join(cd, "b2000/b2000.shp")
 source2000_f= os.path.join(cd, "b2000/b2000_fixed.shp")
-b0= os.path.join(cd, "b0/b0.shp")
-b0_f= os.path.join(cd, "b0/b0.shp")
 cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/"
 cluster250= os.path.join(cd, "b250_cluster/b250_cluster.shp")
-cluster250_fixed= os.path.join(cd, "b250_cluster/b250_cluster_fixed.shp")
 cluster500= os.path.join(cd, "b500_cluster/b500_cluster.shp")
-cluster500_fixed= os.path.join(cd, "b500_cluster/b500_cluster_fixed.shp")
 cluster1000= os.path.join(cd, "b1000_cluster/b1000_cluster.shp")
-cluster1000_fixed= os.path.join(cd, "b1000_cluster/b1000_cluster_fixed.shp")
 cluster2000= os.path.join(cd, "b2000_cluster/b2000_cluster.shp")
-cluster2000_fixed= os.path.join(cd, "b2000_cluster/b2000_cluster_fixed.shp")
-cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/"
-cluster250_to_farm_id= os.path.join(cd, "cluster250_to_farm_id.csv")
-cluster500_to_farm_id= os.path.join(cd, "cluster500_to_farm_id.csv")
-cluster1000_to_farm_id= os.path.join(cd, "cluster1000_to_farm_id.csv")
-cluster2000_to_farm_id= os.path.join(cd, "cluster2000_to_farm_id.csv")
 
 # Delete existing outputs if they exist
-for f in [source250_f, source500_f, source1000_f, source2000_f, b0_f, cluster250, cluster500, cluster1000, cluster2000, cluster250_fixed, cluster500_fixed, cluster1000_fixed, cluster2000_fixed, cluster250_to_farm_id, cluster500_to_farm_id, cluster1000_to_farm_id, cluster2000_to_farm_id]:
+for f in [source250_f, source500_f, source1000_f, source2000_f, cluster250, cluster500, cluster1000, cluster2000]:
     delete_shapefile(f)
 
 
