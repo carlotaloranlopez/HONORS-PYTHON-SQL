@@ -19,7 +19,7 @@ def delete_shapefile(path):
 # Set working directory and file paths
 cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/FARMS/NF_BUFFERS/"
 b0= os.path.join(cd, "b0/b0.shp")
-b0_f= os.path.join(cd, "b0/b0.shp")
+b0_f= os.path.join(cd, "b0/b0_fixed.shp")
 cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/"
 cluster250= os.path.join(cd, "b250_cluster/b250_cluster.shp")
 cluster250_fixed= os.path.join(cd, "b250_cluster/b250_cluster_fixed.shp")
