@@ -1,7 +1,7 @@
 # --------------------------------------------------------------------------------------------
-# This file takes a cluster 250 shapefile and creates buffers at multiples of 250m from
+# This file takes a cluster 500 shapefile and creates buffers at multiples of 500m from
 # its border. These files are saved to each buffer sub-folder in foler with name 
-# b250_cluster_b* inside CREDIT/GLEBAS/CLUSTERS/b250_cluster.
+# b500_cluster_b* inside CREDIT/GLEBAS/CLUSTERS/b500_cluster.
 # --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
@@ -18,18 +18,20 @@ def delete_shapefile(path):
             os.remove(p)
 
 # Create variables to set working directory, buffer dictionary with buffer names and distance in decimal degrees, and universal input file
-cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b250_cluster/"
+cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b500_cluster/"
 buffers = {
-    "250": 0.0022696,
     "500": 0.0045392,
-    "750": 0.0068089,
     "1000": 0.0090785,
-    "1250": 0.0113481,
     "1500": 0.0136178,
-    "1750": 0.0158874,
-    "2000": 0.018157
+    "2000": 0.018157,
+    "2500": 0.022696,
+    "3000": 0.027235,
+    "3500": 0.031775,
+    "4000": 0.036314,
+    "4500": 0.040853,
+    "5000": 0.045392
 }
-input_vector = f"{cd}b250_cluster_b0/b250_cluster_b0_fixed.shp"
+input_vector = f"{cd}b500_cluster_b0/b500_cluster_b0_fixed.shp"
 
 
 # --------------------------------------------------------------------------------------------
@@ -38,7 +40,7 @@ input_vector = f"{cd}b250_cluster_b0/b250_cluster_b0_fixed.shp"
 
 for b in buffers:
     # Define output file name and get distance from dictionary
-    output_vector = f"{cd}b250_cluster_b{b}/b250_cluster_b{b}.shp"
+    output_vector = f"{cd}b500_cluster_b{b}/b500_cluster_b{b}.shp"
     degrees = buffers[b]
     
     # Remove existing buffer file if it exists
