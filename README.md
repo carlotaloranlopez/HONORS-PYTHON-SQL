@@ -105,9 +105,9 @@ This folder will get buffer information such as area, state, distance to other f
                         100M_BUFFERS
                     CLUSTERS
                         b250_cluster <-- cluster zonal histograms saved here!
-                            b500_cluster
-                            b1000_cluster
-                            b2000_cluster
+                        b500_cluster
+                        b750_cluster
+                        b1000_cluster
             DATA_RAW
                 DEFORESTATION
                     Mapbiomas <-- land use files live here
