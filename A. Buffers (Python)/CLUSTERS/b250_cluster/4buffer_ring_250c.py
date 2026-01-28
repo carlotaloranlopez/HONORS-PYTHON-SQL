@@ -84,4 +84,4 @@ for inner, outer in buffer_pairs:
         'INPUT': outer_src,
         'OVERLAY': inner_src,
         'OUTPUT': ring_path
-    })C/100
+    })
