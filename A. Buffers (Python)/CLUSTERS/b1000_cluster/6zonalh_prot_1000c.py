@@ -1,5 +1,5 @@
 # --------------------------------------------------------------------------------------------
-# This script computes zonal histograms for buffer polygons in the 250m cluster 
+# This script computes zonal histograms for buffer polygons in the 1000m cluster 
 # using land use rasters. Results are saved as buffer-year .csv files inside buffer folders 
 # b1000_cluster_b*, found in the clean data folder, under DEFORESTATION/CLUSTERS/1000_cluster.
 # --------------------------------------------------------------------------------------------
