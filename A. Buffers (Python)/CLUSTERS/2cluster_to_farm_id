@@ -68,6 +68,12 @@ processing.run("native:fixgeometries", {
     'OUTPUT': cluster2000_fixed
     }
 )
+processing.run("native:fixgeometries", {
+    'INPUT': b0,
+    'METHOD': 1,
+    'OUTPUT': b0_f
+    }
+)
 
 
 # --------------------------------------------------------------------------------------------
