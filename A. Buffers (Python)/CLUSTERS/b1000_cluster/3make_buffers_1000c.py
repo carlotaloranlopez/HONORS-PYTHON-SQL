@@ -1,7 +1,7 @@
 # --------------------------------------------------------------------------------------------
 # This file takes a cluster 1000 shapefile and creates buffers at multiples of 1000m from
 # its border. These files are saved to each buffer sub-folder in foler with name 
-# b1000_cluster_b* inside CREDIT/GLEBAS/CLUSTERS/b250_cluster.
+# b1000_cluster_b* inside CREDIT/GLEBAS/CLUSTERS/b1000_cluster.
 # --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ buffers = {
     "4000": 0.036314,
     "5000": 0.045392
 }
-input_vector = f"{cd}b250_cluster_b0/b250_cluster_b0_fixed.shp"
+input_vector = f"{cd}b1000_cluster_b0/b1000_cluster_b0_fixed.shp"
 
 
 # --------------------------------------------------------------------------------------------

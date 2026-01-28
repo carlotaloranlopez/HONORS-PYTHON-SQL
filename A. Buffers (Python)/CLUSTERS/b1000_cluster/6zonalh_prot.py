@@ -1,7 +1,7 @@
 # --------------------------------------------------------------------------------------------
-# This script computes zonal histograms for buffer polygons in the 500m cluster 
+# This script computes zonal histograms for buffer polygons in the 250m cluster 
 # using land use rasters. Results are saved as buffer-year .csv files inside buffer folders 
-# b500_cluster_b*, found in the clean data folder, under DEFORESTATION/CLUSTERS/250_cluster.
+# b1000_cluster_b*, found in the clean data folder, under DEFORESTATION/CLUSTERS/1000_cluster.
 # --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
@@ -22,17 +22,13 @@ def delete_shapefile(path):
 cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/"
 years = range(2016, 2025)
 buffers = [
-    "b500",
     "b1000",
-    "b1500",
     "b2000",
-    "b2500",
     "b3000",
-    "b3500",
     "b4000",
-    "b4500",
     "b5000"
 ]
+
 
 
 # --------------------------------------------------------------------------------------------
@@ -41,8 +37,8 @@ buffers = [
 
 for b in buffers:
     # Fix geometries
-    input_vector = f"{cd}DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b500_cluster/b500_cluster_{b}/b500_cluster_{b}_ring_prot.shp"
-    fixed_vector = f"{cd}DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b500_cluster/b500_cluster_{b}/b500_cluster_{b}_ring_prot_fixed.shp"
+    input_vector = f"{cd}DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b1000_cluster/b1000_cluster_{b}/b1000_cluster_{b}_ring_prot.shp"
+    fixed_vector = f"{cd}DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b1000_cluster/b1000_cluster_{b}/b1000_cluster_{b}_ring_prot_fixed.shp"
 
     # Delete old fixed shapefile if it exists
     if os.path.exists(fixed_vector):
@@ -60,7 +56,7 @@ for b in buffers:
     # Zonal histogram for each year
     for y in years:
         input_raster = f"{cd}DATA_RAW/DEFORESTATION/Mapbiomas/{y}_cover.tif"
-        output_csv = f"{cd}DATA_CLEAN/DEFORESTATION/CLUSTERS/b500_cluster/b500_cluster_{b}/b500_cluster_{b}_cover{y}_prot.csv"
+        output_csv = f"{cd}DATA_CLEAN/DEFORESTATION/CLUSTERS/b1000_cluster/b1000_cluster_{b}/b1000_cluster_{b}_cover{y}_prot.csv"
 
         # Delete old csv if it exists
         if os.path.exists(output_csv):
@@ -92,8 +88,8 @@ for b in buffers:
 # --------------------------------------------------------------------------------------------
 
 # Fix geometries
-input_vector = f"{cd}DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b500_cluster/b500_cluster_b0/b500_cluster_b0_prot.shp"
-fixed_vector = f"{cd}DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b500_cluster/b500_cluster_b0/b500_cluster_b0_prot_fixed.shp"
+input_vector = f"{cd}DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b1000_cluster/b1000_cluster_b0/b1000_cluster_b0_prot.shp"
+fixed_vector = f"{cd}DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/b1000_cluster/b1000_cluster_b0/b1000_cluster_b0_prot_fixed.shp"
 
 # Delete old fixed shapefile if it exists
 if os.path.exists(fixed_vector):
@@ -112,7 +108,7 @@ processing.run(
 # Zonal histogram for each year
 for y in years:
     input_raster = f"{cd}DATA_RAW/DEFORESTATION/Mapbiomas/{y}_cover.tif"
-    output_csv = f"{cd}DATA_CLEAN/DEFORESTATION/CLUSTERS/b500_cluster/b500_cluster_b0/b250_cluster_b0_cover{y}_prot.csv"
+    output_csv = f"{cd}DATA_CLEAN/DEFORESTATION/CLUSTERS/b1000_cluster/b1000_cluster_b0/b1000_cluster_b0_cover{y}_prot.csv"
 
     # Delete old CSV if it exists
     if os.path.exists(output_csv):
