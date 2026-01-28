@@ -1,12 +1,11 @@
 # --------------------------------------------------------------------------------------------
 # This file removes overlap between outer and inner buffers to create disjoint rings for the
-# 100M specification. For instance:
-#   b100_ring  = b100  - b0
-#   b200_ring  = b200  - b100
-#   b300_ring  = b300  - b200
+# 250m cluster:
+#   b250_ring  = b250  - b0
+#   b500_ring  = b500  - b125
 #   ...
-# Files are saved as b*_ring to each buffer sub-folder with name b*, inside CREDIT/
-# GLEBAS/FARMS/100M_BUFFERS, in the clean data folder.
+# Files are saved as b250_cluster_b*_ring to each buffer sub-folder with name b250_cluster_b*, 
+# inside CREDIT/GLEBAS/CLUSTERS/b250_cluster, in the clean data folder.
 # --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
@@ -85,4 +84,4 @@ for inner, outer in buffer_pairs:
         'INPUT': outer_src,
         'OVERLAY': inner_src,
         'OUTPUT': ring_path
-    })
+    })C/100
