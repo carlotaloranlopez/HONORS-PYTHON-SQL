@@ -3,131 +3,84 @@
 # --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
-# SETUP
+# SETUP
 # --------------------------------------------------------------------------------------------
 
-# Dependencies & delete shapefile function definition
 import os
 import processing
 from qgis.core import QgsProcessingFeatureSourceDefinition, QgsFeatureRequest
+
 def delete_shapefile(path):
     for ext in [".shp", ".shx", ".dbf", ".prj", ".cpg"]:
         p = path.replace(".shp", ext)
         if os.path.exists(p):
             os.remove(p)
 
-# Set working directory and file paths
-cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/FARMS/NF_BUFFERS/"
-source250= os.path.join(cd, "b250/b250.shp")
-source250_f= os.path.join(cd, "b250/b250_fixed.shp")
-source500= os.path.join(cd, "b500_1/b500_1.shp")
-source500_f= os.path.join(cd, "b500_1/b500_1_fixed.shp")
-source1000= os.path.join(cd, "b1000_1/b1000_1.shp")
-source1000_f= os.path.join(cd, "b1000_1/b1000_1_fixed.shp")
-source2000= os.path.join(cd, "b2000/b2000.shp")
-source2000_f= os.path.join(cd, "b2000/b2000_fixed.shp")
-cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/"
-cluster250= os.path.join(cd, "b250_cluster/b250_cluster_b0/b250_cluster_b0.shp")
-cluster500= os.path.join(cd, "b500_cluster/b500_cluster_b0/b500_cluster_b0.shp")
-cluster1000= os.path.join(cd, "b1000_cluster/b1000_cluster_b0/b1000_cluster_b0.shp")
-cluster2000= os.path.join(cd, "b2000_cluster/b2000_cluster_b0/b2000_cluster_b0.shp")
+# Base directories
+buffers_dir = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/FARMS/NF_BUFFERS/"
+clusters_dir = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/CLUSTERS/"
 
-# Delete existing outputs if they exist
-for f in [source250_f, source500_f, source1000_f, source2000_f, cluster250, cluster500, cluster1000, cluster2000]:
-    delete_shapefile(f)
+# Input / output paths
+sources = [
+    (
+        os.path.join(buffers_dir, "b250/b250.shp"),
+        os.path.join(buffers_dir, "b250/b250_fixed.shp"),
+        os.path.join(clusters_dir, "b250_cluster/b250_cluster_b0/b250_cluster_b0.shp")
+    ),
+    (
+        os.path.join(buffers_dir, "b500_1/b500_1.shp"),
+        os.path.join(buffers_dir, "b500_1/b500_1_fixed.shp"),
+        os.path.join(clusters_dir, "b500_cluster/b500_cluster_b0/b500_cluster_b0.shp")
+    ),
+    (
+        os.path.join(buffers_dir, "b1000_1/b1000_1.shp"),
+        os.path.join(buffers_dir, "b1000_1/b1000_1_fixed.shp"),
+        os.path.join(clusters_dir, "b1000_cluster/b1000_cluster_b0/b1000_cluster_b0.shp")
+    ),
+    (
+        os.path.join(buffers_dir, "b2000/b2000.shp"),
+        os.path.join(buffers_dir, "b2000/b2000_fixed.shp"),
+        os.path.join(clusters_dir, "b2000_cluster/b2000_cluster_b0/b2000_cluster_b0.shp")
+    )
+]
 
+# Delete existing outputs
+for _, fixed, cluster in sources:
+    delete_shapefile(fixed)
+    delete_shapefile(cluster)
 
 # --------------------------------------------------------------------------------------------
-# FIX SOURCE GEOMETRIES
+# FIX GEOMETRIES
 # --------------------------------------------------------------------------------------------
 
-processing.run("native:fixgeometries", {
-    'INPUT': source250,
-    'METHOD': 1,
-    'OUTPUT': source250_f
-    }
-)
-processing.run("native:fixgeometries", {
-    'INPUT': source500,
-    'METHOD': 1,
-    'OUTPUT': source500_f
-    }
-)
-processing.run("native:fixgeometries", {
-    'INPUT': source1000,
-    'METHOD': 1,
-    'OUTPUT': source1000_f
-    }
-)
-processing.run("native:fixgeometries", {
-    'INPUT': source2000,
-    'METHOD': 1,
-    'OUTPUT': source2000_f
-    }
-)
-
+for src, fixed, _ in sources:
+    processing.run(
+        "native:fixgeometries",
+        {
+            "INPUT": src,
+            "METHOD": 1,
+            "OUTPUT": fixed
+        }
+    )
 
 # --------------------------------------------------------------------------------------------
 # DISSOLVE USING GDAL
 # --------------------------------------------------------------------------------------------
 
-processing.run(
-    "gdal:dissolve", {
-        'INPUT': source250_f,
-        'FIELD':'',
-        'GEOMETRY':'geometry',
-        'EXPLODE_COLLECTIONS':True,
-        'KEEP_ATTRIBUTES':False,
-        'COUNT_FEATURES':False,
-        'COMPUTE_AREA':False,
-        'COMPUTE_STATISTICS':False,
-        'STATISTICS_ATTRIBUTE':'',
-        'OPTIONS': 'GEOMETRY_NAME=geometry -nlt MULTIPOLYGON',
-        'OUTPUT': cluster250
-    }
-)
-processing.run(
-    "gdal:dissolve", {
-        'INPUT': source500_f,
-        'FIELD':'',
-        'GEOMETRY':'geometry',
-        'EXPLODE_COLLECTIONS':True,
-        'KEEP_ATTRIBUTES':False,
-        'COUNT_FEATURES':False,
-        'COMPUTE_AREA':False,
-        'COMPUTE_STATISTICS':False,
-        'STATISTICS_ATTRIBUTE':'',
-        'OPTIONS': 'GEOMETRY_NAME=geometry -nlt MULTIPOLYGON',
-        'OUTPUT': cluster500
-    }
-)
-processing.run(
-    "gdal:dissolve", {
-        'INPUT': source1000_f,
-        'FIELD':'',
-        'GEOMETRY':'geometry',
-        'EXPLODE_COLLECTIONS':True,
-        'KEEP_ATTRIBUTES':False,
-        'COUNT_FEATURES':False,
-        'COMPUTE_AREA':False,
-        'COMPUTE_STATISTICS':False,
-        'STATISTICS_ATTRIBUTE':'',
-        'OPTIONS': 'GEOMETRY_NAME=geometry -nlt MULTIPOLYGON',
-        'OUTPUT': cluster1000
-    }
-)
-processing.run(
-    "gdal:dissolve", {
-        'INPUT': source2000_f,
-        'FIELD':'',
-        'GEOMETRY':'geometry',
-        'EXPLODE_COLLECTIONS':True,
-        'KEEP_ATTRIBUTES':False,
-        'COUNT_FEATURES':False,
-        'COMPUTE_AREA':False,
-        'COMPUTE_STATISTICS':False,
-        'STATISTICS_ATTRIBUTE':'',
-        'OPTIONS': 'GEOMETRY_NAME=geometry -nlt MULTIPOLYGON',
-        'OUTPUT': cluster2000
-    }
-)
+for _, fixed, cluster in sources:
+    processing.run(
+        "gdal:dissolve",
+        {
+            "INPUT": fixed,
+            "FIELD": "",
+            "GEOMETRY": "geometry",
+            "EXPLODE_COLLECTIONS": True,
+            "KEEP_ATTRIBUTES": False,
+            "COUNT_FEATURES": False,
+            "COMPUTE_AREA": False,
+            "COMPUTE_STATISTICS": False,
+            "STATISTICS_ATTRIBUTE": "",
+            "OPTIONS": "GEOMETRY_NAME=geometry -nlt MULTIPOLYGON",
+            "OUTPUT": cluster
+        }
+    )
