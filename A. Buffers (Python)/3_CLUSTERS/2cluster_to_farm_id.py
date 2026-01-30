@@ -123,3 +123,8 @@ for i in range(len(clusters)):
             "OUTPUT": output_csv
         }
     )
+(
+        os.path.join(buffers_dir, "b500_1/b500_1_ring_prot.shp"),
+        os.path.join(buffers_dir, "b500_1/b500_1_ring_prot_fixed.shp"),
+        os.path.join(buffers_dir, "b500_1/b500_1_ring_prot_priv.shp")
+    ),
