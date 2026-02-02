@@ -9,7 +9,7 @@
 
 import os
 import processing
-
+from qgis.core import QgsProcessingFeatureSourceDefinition, QgsFeatureRequest
 def delete_shapefile(path):
     for ext in [".shp", ".shx", ".dbf", ".prj", ".cpg"]:
         p = path.replace(".shp", ext)
