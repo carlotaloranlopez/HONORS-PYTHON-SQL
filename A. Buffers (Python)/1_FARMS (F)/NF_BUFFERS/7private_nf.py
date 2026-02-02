@@ -98,10 +98,16 @@ for src, fixed, _ in sources:
 # --------------------------------------------------------------------------------------------
 
 for _, fixed, clipped in sources:
+    fixed_src = QgsProcessingFeatureSourceDefinition(
+        fixed,
+        flags=QgsProcessingFeatureSourceDefinition.FlagOverrideDefaultGeometryCheck,
+        geometryCheck=QgsFeatureRequest.GeometrySkipInvalid
+    )
+
     processing.run(
         "native:clip",
         {
-            "INPUT": fixed,
+            "INPUT": fixed_src,
             "OVERLAY": private_dir,
             "OUTPUT": clipped
         }
