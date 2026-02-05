@@ -20,9 +20,9 @@ def delete_shapefile(path):
 # Create variables to set working directory, buffer dictionary with buffer names and distance in decimal degrees, and universal input file
 cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/FARMS/NF_BUFFERS/"
 buffers_nf = {
-    "4000": 0.036314
-    "8000": 0.072628
-    "5000": 0.0453925
+    "4000": 0.036314,
+    "8000": 0.072628,
+    "5000": 0.0453925,
     "10000": 0.090785
 }
 input_vector = f"{cd}b0/b0.shp"
