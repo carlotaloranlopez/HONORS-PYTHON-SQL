@@ -38,37 +38,7 @@ sources = [
         os.path.join(buffers_dir, "b500_1/b500_1_ring_prot.shp"),
         os.path.join(buffers_dir, "b500_1/b500_1_ring_prot_fixed.shp"),
         os.path.join(buffers_dir, "b500_1/b500_1_ring_prot_priv.shp")
-    ),
-    (
-        os.path.join(buffers_dir, "b500_2/b500_2_ring_prot.shp"),
-        os.path.join(buffers_dir, "b500_2/b500_2_ring_prot_fixed.shp"),
-        os.path.join(buffers_dir, "b500_2/b500_2_ring_prot_priv.shp")
-    ),
-    (
-        os.path.join(buffers_dir, "b750/b750_ring_prot.shp"),
-        os.path.join(buffers_dir, "b750/b750_ring_prot_fixed.shp"),
-        os.path.join(buffers_dir, "b750/b750_ring_prot_priv.shp")
-    ),
-    (
-        os.path.join(buffers_dir, "b1000_1/b1000_1_ring_prot.shp"),
-        os.path.join(buffers_dir, "b1000_1/b1000_1_ring_prot_fixed.shp"),
-        os.path.join(buffers_dir, "b1000_1/b1000_1_ring_prot_priv.shp")
-    ),
-    (
-        os.path.join(buffers_dir, "b1000_2/b1000_2_ring_prot.shp"),
-        os.path.join(buffers_dir, "b1000_2/b1000_2_ring_prot_fixed.shp"),
-        os.path.join(buffers_dir, "b1000_2/b1000_2_ring_prot_priv.shp")
-    ),
-    (
-        os.path.join(buffers_dir, "b1500/b1500_ring_prot.shp"),
-        os.path.join(buffers_dir, "b1500/b1500_ring_prot_fixed.shp"),
-        os.path.join(buffers_dir, "b1500/b1500_ring_prot_priv.shp")
-    ),
-    (
-        os.path.join(buffers_dir, "b2000/b2000_ring_prot.shp"),
-        os.path.join(buffers_dir, "b2000/b2000_ring_prot_fixed.shp"),
-        os.path.join(buffers_dir, "b2000/b2000_ring_prot_priv.shp")
-    ),
+    )
 ]
 
 # --------------------------------------------------------------------------------------------
