@@ -22,6 +22,8 @@ cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GL
 buffers_nf = {
     "4000": 0.036314
     "8000": 0.072628
+    "5000": 0.0453925
+    "10000": 0.090785
 }
 input_vector = f"{cd}b0/b0.shp"
 
@@ -83,7 +85,9 @@ def delete_shapefile(path):
 cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/DATA_CLEAN/CREDIT/GLEBAS/FARMS/NF_BUFFERS/"
 buffer_pairs = [
     ("b0", "b4000"),
-    ("b4000", "b8000")
+    ("b4000", "b8000"),
+    ("b0", "b5000"),
+    ("b5000", "b10000")
 ]
 
 
@@ -168,7 +172,9 @@ protected = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/SHAPEFILES/Br
 buffers = [
     "b0",
     "b4000",
-    "b8000"
+    "b8000",
+    "b5000",
+    "b10000"
 ]
 
 
@@ -252,8 +258,8 @@ def delete_shapefile(path):
 
 # Create variables to set working directory, year, and buffer lists
 cd = "/zfs/students/cloranlo/Downloads/CREDIT_DEFOREST/DATA/"
-years = range(2016, 2025)
-buffers = ["4000", "8000"]
+years = range(2010, 2025)
+buffers = ["4000", "8000", "5000", "10000"]
 
 
 # --------------------------------------------------------------------------------------------
